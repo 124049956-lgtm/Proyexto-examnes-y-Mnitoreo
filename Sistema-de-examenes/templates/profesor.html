@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Dashboard Profesor
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#f1f5f9;
+display:flex;
+}
+
+.sidebar{
+width:260px;
+height:100vh;
+background:#0f172a;
+position:fixed;
+padding:30px 20px;
+color:white;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+margin-bottom:50px;
+text-align:center;
+}
+
+.menu a{
+display:flex;
+align-items:center;
+gap:15px;
+color:#cbd5e1;
+text-decoration:none;
+padding:15px;
+border-radius:12px;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.menu a:hover{
+background:#1e293b;
+color:white;
+}
+
+.main{
+margin-left:260px;
+width:calc(100% - 260px);
+padding:30px;
+}
+
+.box{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 4px 15px rgba(0,0,0,.05);
+overflow:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+text-align:left;
+padding:15px;
+background:#f8fafc;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #e2e8f0;
+}
+
+.online{
+background:#dcfce7;
+color:#166534;
+padding:8px 15px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+}
+
+.offline{
+background:#fee2e2;
+color:#991b1b;
+padding:8px 15px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+Sistema Escolar
+</div>
+
+<div class="menu">
+
+<a href="#">
+<i class="fa-solid fa-chart-line"></i>
+Dashboard
+</a>
+
+<a href="#">
+<i class="fa-solid fa-network-wired"></i>
+Red en tiempo real
+</a>
+
+<a href="/logout">
+<i class="fa-solid fa-right-from-bracket"></i>
+Cerrar sesión
+</a>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="box">
+
+<h2 style="margin-bottom:20px;">
+Monitoreo en tiempo real
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Nombre
+</th>
+
+<th>
+Matrícula
+</th>
+
+<th>
+Grupo
+</th>
+
+<th>
+IP
+</th>
+
+<th>
+Estado
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabla-alumnos">
+
+{% for alumno in alumnos %}
+
+<tr>
+
+<td>
+{{ alumno[1] }}
+</td>
+
+<td>
+{{ alumno[2] }}
+</td>
+
+<td>
+{{ alumno[3] }}
+</td>
+
+<td>
+{{ alumno[5] }}
+</td>
+
+<td>
+
+{% if alumno[6] == "Online" %}
+
+<span class="online">
+Online
+</span>
+
+{% else %}
+
+<span class="offline">
+Offline
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const socket = io();
+
+socket.on(
+
+    "actualizar_monitoreo",
+
+    function(data){
+
+        let tabla = document.getElementById("tabla-alumnos");
+
+        tabla.innerHTML = "";
+
+        data.alumnos.forEach(function(alumno){
+
+            let estado = "";
+
+            if(alumno[6] == "Online"){
+
+                estado = `
+                <span class="online">
+                Online
+                </span>
+                `;
+
+            }else{
+
+                estado = `
+                <span class="offline">
+                Offline
+                </span>
+                `;
+
+            }
+
+            tabla.innerHTML += `
+
+            <tr>
+
+                <td>${alumno[1]}</td>
+
+                <td>${alumno[2]}</td>
+
+                <td>${alumno[3]}</td>
+
+                <td>${alumno[5]}</td>
+
+                <td>${estado}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>

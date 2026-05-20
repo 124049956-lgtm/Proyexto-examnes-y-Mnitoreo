@@ -1,0 +1,1 @@
+Enable-NetAdapter -Name "Wi-Fi" -Confirm:$false

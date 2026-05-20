@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Acceso Profesor
+    </title>
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ICONOS -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Inter',sans-serif;
+        }
+
+        body{
+
+            height:100vh;
+
+            background:#f1f5f9;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            overflow:hidden;
+
+        }
+
+        /* FONDO */
+
+        .background{
+
+            position:absolute;
+
+            width:100%;
+
+            height:100%;
+
+            background:
+
+            radial-gradient(circle at top left,#0f172a15,transparent 30%),
+            radial-gradient(circle at bottom right,#2563eb15,transparent 30%);
+
+            z-index:0;
+
+        }
+
+        /* CONTENEDOR */
+
+        .container{
+
+            position:relative;
+
+            z-index:1;
+
+            width:980px;
+
+            height:580px;
+
+            background:white;
+
+            border-radius:30px;
+
+            overflow:hidden;
+
+            display:flex;
+
+            box-shadow:0 10px 40px rgba(0,0,0,.08);
+
+        }
+
+        /* LEFT */
+
+        .left{
+
+            width:45%;
+
+            background:linear-gradient(
+                135deg,
+                #0f172a,
+                #1e293b
+            );
+
+            color:white;
+
+            padding:60px;
+
+            display:flex;
+
+            flex-direction:column;
+
+            justify-content:center;
+
+        }
+
+        .icon{
+
+            width:95px;
+
+            height:95px;
+
+            border-radius:25px;
+
+            background:rgba(255,255,255,.12);
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            font-size:38px;
+
+            margin-bottom:30px;
+
+            backdrop-filter:blur(10px);
+
+        }
+
+        .left h1{
+
+            font-size:42px;
+
+            line-height:1.2;
+
+            margin-bottom:20px;
+
+        }
+
+        .left p{
+
+            color:#cbd5e1;
+
+            line-height:1.8;
+
+            font-size:15px;
+
+        }
+
+        /* RIGHT */
+
+        .right{
+
+            width:55%;
+
+            padding:60px;
+
+            display:flex;
+
+            flex-direction:column;
+
+            justify-content:center;
+
+        }
+
+        .right h2{
+
+            font-size:34px;
+
+            color:#0f172a;
+
+            margin-bottom:10px;
+
+        }
+
+        .right p{
+
+            color:#64748b;
+
+            margin-bottom:40px;
+
+        }
+
+        /* INPUTS */
+
+        .input-group{
+
+            position:relative;
+
+            margin-bottom:25px;
+
+        }
+
+        .input-group i{
+
+            position:absolute;
+
+            top:19px;
+
+            left:18px;
+
+            color:#64748b;
+
+            font-size:16px;
+
+        }
+
+        input{
+
+            width:100%;
+
+            padding:18px 18px 18px 52px;
+
+            border:none;
+
+            background:#f8fafc;
+
+            border-radius:15px;
+
+            outline:none;
+
+            border:1px solid #e2e8f0;
+
+            transition:.3s;
+
+            font-size:15px;
+
+        }
+
+        input:focus{
+
+            border-color:#2563eb;
+
+            background:white;
+
+            box-shadow:0 0 0 4px rgba(37,99,235,.1);
+
+        }
+
+        /* BOTON */
+
+        button{
+
+            width:100%;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:15px;
+
+            background:#0f172a;
+
+            color:white;
+
+            font-size:16px;
+
+            font-weight:600;
+
+            cursor:pointer;
+
+            transition:.3s;
+
+        }
+
+        button:hover{
+
+            background:#1e293b;
+
+            transform:translateY(-2px);
+
+        }
+
+        /* FOOTER */
+
+        .footer{
+
+            margin-top:30px;
+
+            text-align:center;
+
+            color:#64748b;
+
+            font-size:14px;
+
+        }
+
+        .footer a{
+
+            color:#2563eb;
+
+            text-decoration:none;
+
+            font-weight:600;
+
+        }
+
+        /* BADGE */
+
+        .badge{
+
+            margin-top:25px;
+
+            background:#f8fafc;
+
+            border:1px solid #e2e8f0;
+
+            border-radius:15px;
+
+            padding:18px;
+
+        }
+
+        .badge h3{
+
+            color:#0f172a;
+
+            font-size:15px;
+
+            margin-bottom:8px;
+
+        }
+
+        .badge p{
+
+            margin:0;
+
+            font-size:14px;
+
+            color:#64748b;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <div class="container">
+
+        <!-- LEFT -->
+
+        <div class="left">
+
+            <div class="icon">
+
+                <i class="fa-solid fa-chalkboard-user"></i>
+
+            </div>
+
+            <h1>
+
+                Panel Institucional Docente
+
+            </h1>
+
+            <p>
+
+                Accede al sistema de monitoreo académico para administrar
+                grupos, exámenes, entregas y supervisión estudiantil.
+
+            </p>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="right">
+
+            <h2>
+
+                Acceso Profesor
+
+            </h2>
+
+            <p>
+
+                Introduce tus credenciales institucionales.
+
+            </p>
+
+            <form
+                action="/entrar_profesor"
+                method="POST"
+            >
+
+                <!-- USUARIO -->
+
+                <div class="input-group">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        name="usuario"
+                        placeholder="Usuario institucional"
+                        required
+                    >
+
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit">
+
+                    Entrar al panel
+
+                </button>
+
+            </form>
+
+            <!-- INFO -->
+
+            <div class="badge">
+
+                <h3>
+
+                    Acceso de demostración
+
+                </h3>
+
+                <p>
+
+                    Usuario: profesor <br>
+                    Contraseña: 1234
+
+                </p>
+
+            </div>
+
+            <!-- FOOTER -->
+
+            <div class="footer">
+
+                ¿Deseas volver?
+                <a href="/">
+
+                    Regresar al inicio
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
